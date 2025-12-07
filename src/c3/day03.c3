@@ -1,4 +1,4 @@
-// ~/~ begin <<docs/day03.md#docs/day03.md::src/c3/day03.c3>>[init]
+// ~/~ begin <<docs/day03.md#day03::src/c3/day03.c3>>[init]
 module arg_max { Tx };
 
 <*

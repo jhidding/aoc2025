@@ -21,15 +21,15 @@ def window[T](iterable: Iterable[T], n: int, fill: T) -> Generator[tuple[T,...]]
     (adapted from itertools documentation)
 
     Example:
-    
+
         window('ABCD', 3, '*') → *AB ABC BCD CD*
     """
     iterator = iter(iterable)
     window = deque(repeat(fill, n), maxlen=n)
-    
+
     for x in islice(iterator, n // 2):
         window.append(x)
-        
+
     for x in iterator:
         window.append(x)
         yield tuple(window)
@@ -44,9 +44,8 @@ def window_2d[T](image: list[Iterable[T]], n: int, fill: T) -> Iterable[Iterable
     Similar to the 1d `window` function, but now in 2d.
     """
     width = len(image[0])
-    return map(
-        lambda r: zip(*map(lambda l: window(l, n, fill), r)),
-        window(image, n, [fill]*width))
+    return map(lambda r: zip(*map(lambda l: window(l, n, fill), r)),
+               window(image, n, [fill]*width))
 
 
 def accessable(a: tuple[tuple[str,...],...]) -> bool:
@@ -81,5 +80,5 @@ if __name__ == "__main__":
     result = fixed_point(erode, inp)
     # print("\n".join(result))
     print("Part 2:", count_rolls(inp) - count_rolls(result))
-    
+
 # ~/~ end

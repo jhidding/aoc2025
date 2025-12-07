@@ -11,3 +11,8 @@ dependencies = [
 
 [tool.uv.sources]
 entangled-cli = { git = "https://github.com/entangled/entangled.py" }
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.1",
+]

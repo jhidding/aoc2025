@@ -1,8 +1,8 @@
-# ~/~ begin <<docs/day03.md#docs/day03.md::src/python/day03.py>>[init]
+# ~/~ begin <<docs/day03.md#day03::src/python/day03.py>>[init]
 from collections.abc import Generator
 from functools import partial
 
-# ~/~ begin <<docs/day03.md#docs/day03.md::read-input>>[init]
+# ~/~ begin <<docs/day03.md#day03::read-input>>[init]
 def readlines() -> Generator[str]:
     while True:
         try:
@@ -10,7 +10,7 @@ def readlines() -> Generator[str]:
         except EOFError:
             return
 # ~/~ end
-# ~/~ begin <<docs/day03.md#docs/day03.md::joltage>>[init]
+# ~/~ begin <<docs/day03.md#day03::joltage>>[init]
 def joltage(n: int, bank: str) -> int:
     num = ""
     pos = 0
@@ -24,7 +24,7 @@ def joltage(n: int, bank: str) -> int:
 
     return int(num)
 # ~/~ end
-# ~/~ begin <<docs/day03.md#docs/day03.md::main>>[init]
+# ~/~ begin <<docs/day03.md#day03::main>>[init]
 if __name__ == "__main__":
     print("# Day 03")
     inp: list[str] = list(readlines())

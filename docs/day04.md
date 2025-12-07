@@ -48,9 +48,8 @@ def window_2d[T](image: list[Iterable[T]], n: int, fill: T) -> Iterable[Iterable
     Similar to the 1d `window` function, but now in 2d.
     """
     width = len(image[0])
-    return map(
-        lambda r: zip(*map(lambda l: window(l, n, fill), r)),
-        window(image, n, [fill]*width))
+    return map(lambda r: zip(*map(lambda l: window(l, n, fill), r)),
+               window(image, n, [fill]*width))
 
 
 def accessable(a: tuple[tuple[str,...],...]) -> bool:

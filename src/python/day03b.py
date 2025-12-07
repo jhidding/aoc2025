@@ -1,10 +1,10 @@
-# ~/~ begin <<docs/day03.md#docs/day03.md::src/python/day03b.py>>[init]
+# ~/~ begin <<docs/day03.md#day03::src/python/day03b.py>>[init]
 from abc import ABCMeta, abstractmethod
 from dataclasses import dataclass
 from collections.abc import Callable, Iterable, Generator
 from functools import partial, reduce
 
-# ~/~ begin <<docs/day03.md#docs/day03.md::read-input>>[init]
+# ~/~ begin <<docs/day03.md#day03::read-input>>[init]
 def readlines() -> Generator[str]:
     while True:
         try:
@@ -12,7 +12,7 @@ def readlines() -> Generator[str]:
         except EOFError:
             return
 # ~/~ end
-# ~/~ begin <<docs/day03.md#docs/day03.md::joltage>>[init]
+# ~/~ begin <<docs/day03.md#day03::joltage>>[init]
 def joltage(n: int, bank: str) -> int:
     num = ""
     pos = 0
@@ -27,7 +27,7 @@ def joltage(n: int, bank: str) -> int:
     return int(num)
 # ~/~ end
 
-# ~/~ begin <<docs/day03.md#docs/day03.md::duct>>[init]
+# ~/~ begin <<docs/day03.md#day03::duct>>[init]
 class Duct[R, X](metaclass=ABCMeta):
     @abstractmethod
     def init(self) -> R:
@@ -44,7 +44,7 @@ class Duct[R, X](metaclass=ABCMeta):
     def reduce(self, it: Iterable[X]):
         return self.fini(reduce(self.step, it, initial=self.init()))
 # ~/~ end
-# ~/~ begin <<docs/day03.md#docs/day03.md::sum>>[init]
+# ~/~ begin <<docs/day03.md#day03::sum>>[init]
 class Sum(Duct[int, int]):
     def init(self):
         return 0
@@ -52,7 +52,7 @@ class Sum(Duct[int, int]):
     def step(self, r: int, x: int) -> int:
         return r + x
 # ~/~ end
-# ~/~ begin <<docs/day03.md#docs/day03.md::map>>[init]
+# ~/~ begin <<docs/day03.md#day03::map>>[init]
 @dataclass
 class Map[R, A, B](Duct[R, A]):
     foo: Callable[[A], B]
@@ -64,7 +64,7 @@ class Map[R, A, B](Duct[R, A]):
     def step(self, r: R, x: A) -> R:
         return self.sink.step(r, self.foo(x))
 # ~/~ end
-# ~/~ begin <<docs/day03.md#docs/day03.md::tee>>[init]
+# ~/~ begin <<docs/day03.md#day03::tee>>[init]
 class Tee[*Rs, A](Duct[tuple[*Rs], A]):
     sinks: tuple[Duct[Any, A],...]
 
@@ -77,7 +77,7 @@ class Tee[*Rs, A](Duct[tuple[*Rs], A]):
     def step(self, r: tuple[*Rs], x: A) -> tuple[*Rs]:
         return tuple(s.step(rn, x) for s, rn in zip(self.sinks, r))
 # ~/~ end
-# ~/~ begin <<docs/day03.md#docs/day03.md::transmain>>[init]
+# ~/~ begin <<docs/day03.md#day03::transmain>>[init]
 if __name__ == "__main__":
     print("# Day 03")
 

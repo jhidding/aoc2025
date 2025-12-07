@@ -1,3 +1,9 @@
+---
+entangled:
+    version: "2.4"
+    namespace: day03
+---
+
 Day 03: Lobby
 =============
 

@@ -10,7 +10,7 @@ dependencies = [
 ]
 
 [tool.uv.sources]
-entangled-cli = { git = "https://github.com/entangled/entangled.py" }
+entangled-cli = { path = "../../entangled/entangled.py", editable = true }
 
 [dependency-groups]
 dev = [

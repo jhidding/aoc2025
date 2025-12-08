@@ -1,6 +1,6 @@
 version = "2.4"
 style = "basic"
-ignore_list = [".venv/**"]
+ignore_list = [".venv/**/*"]
 namespace_default = "private"
 
 [[languages]]

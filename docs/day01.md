@@ -161,3 +161,100 @@ fn void main()
     io::printfn("Part 1: %d\nPart 2: %d", dial.n_stops_zero, dial.n_passes_zero);
 }
 ```
+
+Scheme
+------
+
+First, I'll define transducers in Scheme.
+
+```scheme
+;| file: src/scheme/std/transducers.scm
+(library (std transducers)
+    (export make-reduced reduced? reduced-value map filter tee)
+    (import (except (rnrs) map filter)
+            (prefix (only (rnrs) map filter) internal-))
+
+    (define-record-type reduced (fields value))
+
+    (define map
+        (case-lambda
+            ((f) (lambda (sink)
+                (case-lambda
+                    ; init
+                    (() (sink))
+                    ; fini
+                    ((r) r)
+                    ; step
+                    ((r x) (sink r (f x))))))
+            ((f . args) (apply internal-map f args))))
+
+    (define filter
+        (case-lambda
+            ((f) (lambda (sink)
+                (case-lambda
+                    ; init
+                    (() (sink))
+                    ; fini
+                    ((r) r)
+                    ; step
+                    ((r x) (when (f x) (sink r x))))))
+            ((f . args) apply internal-filter f args)))
+
+    (define (tee . sinks)
+        (case-lambda
+            (() (map apply sinks))
+            ((rs) rs)
+            ((rs x) (map (lambda (sink r) (sink r x)) sinks rs))))
+)
+```
+
+```scheme
+;| file: src/scheme/day01.scm
+(import (except (rnrs) map filter)
+        (std transducers)
+        (std combinators)
+        (monads monads)
+        (parsing parsing))
+
+(define stream-input
+    (case-lambda
+        ((sink) (let loop ((r (sink)))
+            (if (reduced? r)
+                (reduced-value r)
+                (let ((line (get-line (current-input-port))))
+                    (if (eof-object? line)
+                        r
+                        (loop (sink r line)))))))
+        ((tr sink) (stream-input (tr sink)))))
+
+(define (trace msg value)
+    (display msg) (display value) (newline)
+    value)
+
+(define (trace-printer sink)
+    (case-lambda
+        (() (trace "init: " (sink)))
+        ((r) (trace "result: " (sink r)))
+        ((r x) (display "got: ") (display x) (display " -> ") (trace "" (sink r x)))))
+
+(define print-result
+    (case-lambda
+        (() #f)
+        ((r) (display "result: ") (display r) (newline))
+        ((r x) r)))
+
+(define instruction
+  (seq <parsing>
+      (sign <- (choice (parsing-bind (literal "L") (lambda (_) (parsing-return -1)))
+                       (parsing-bind (literal "R") (lambda (_) (parsing-return 1)))))
+      (amount <- integer)
+      (parsing-return (* sign amount))))
+
+(define (parse-instruction s)
+    (parse-string instruction s))
+
+(define (exec state instr)
+    (mod (+ state instr) 100))
+
+(stream-input (compose (map parse-instruction) (filter (compose zero? (partial (swap mod) 100))) trace-printer) +)
+```

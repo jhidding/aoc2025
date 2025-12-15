@@ -26,7 +26,7 @@ def split_on[T](pred: Callable[[T], bool], lst: Iterable[T]) -> Generator[Iterab
     buffer = []
     stop = False
     it = iter(lst)
-    
+
     def take_until():
         nonlocal buffer
         nonlocal stop
@@ -53,7 +53,7 @@ def split_on[T](pred: Callable[[T], bool], lst: Iterable[T]) -> Generator[Iterab
     while not stop:
         skip()
         yield take_until()
-        
+
 if __name__ == "__main__":
     text = list(readlines())
     operators = list(map(operator_syms.get, text[-1].split()))

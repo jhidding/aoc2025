@@ -14,9 +14,9 @@ We get a string of digits and need to find the maximum n-digit number that we ca
 from collections.abc import Generator
 from functools import partial
 
-<<read-input>>
-<<joltage>>
-<<main>>
+<<day03::read-input>>
+<<day03::joltage>>
+<<day03::main>>
 ```
 
 Input
@@ -96,16 +96,17 @@ Now we need to use `operator.add` to indicate we are computing a sum. All of thi
 from abc import ABCMeta, abstractmethod
 from dataclasses import dataclass
 from collections.abc import Callable, Iterable, Generator
+from typing import Any
 from functools import partial, reduce
 
-<<read-input>>
-<<joltage>>
+<<day03::read-input>>
+<<day03::joltage>>
 
-<<duct>>
-<<sum>>
-<<map>>
-<<tee>>
-<<transmain>>
+<<day03::duct>>
+<<day03::sum>>
+<<day03::map>>
+<<day03::tee>>
+<<day03::transmain>>
 ```
 
 First, the `Duct`. This is an object that represents an element in a pipeline. It should have an `init`, `fini` and `step` method. The precise meaning of these methods is given when we implement the `reduce` method.

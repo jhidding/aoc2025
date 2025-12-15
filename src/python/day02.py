@@ -1,10 +1,10 @@
-# ~/~ begin <<docs/day02.md#docs/day02.md::src/python/day02.py>>[init]
+# ~/~ begin <<docs/day02.md#day02::src/python/day02.py>>[init]
 
 from dataclasses import dataclass
 from itertools import chain
 from collections.abc import Generator
 
-# ~/~ begin <<docs/day02.md#docs/day02.md::parsing>>[init]
+# ~/~ begin <<docs/day02.md#day02::parsing>>[init]
 @dataclass(frozen=True)
 class RangeCollection:
     ranges: list[range]
@@ -21,7 +21,7 @@ def parse_range(t: str) -> range:
 def read_input() -> RangeCollection:
     return RangeCollection(list(map(parse_range, input().split(","))))
 # ~/~ end
-# ~/~ begin <<docs/day02.md#docs/day02.md::predicates>>[init]
+# ~/~ begin <<docs/day02.md#day02::predicates>>[init]
 def invalid_id_1(x: int) -> bool:
     seq = str(x)
     n = len(seq)
@@ -46,21 +46,21 @@ def invalid_id_2(x: int) -> bool:
             return True
     return False
 # ~/~ end
-# ~/~ begin <<docs/day02.md#docs/day02.md::generators>>[init]
+# ~/~ begin <<docs/day02.md#day02::generators>>[init]
 def generate_invalid_ids(r: range, divisors=divisors, check_duplicates=True) -> Generator[int]:
-    # ~/~ begin <<docs/day02.md#docs/day02.md::number-strings>>[init]
+    # ~/~ begin <<docs/day02.md#day02::number-strings>>[init]
     seq1 = str(r.start)
     n = len(seq1)
     seq2 = str(r.stop - 1)
     # ~/~ end
-    # ~/~ begin <<docs/day02.md#docs/day02.md::ensure-homogeneity>>[init]
+    # ~/~ begin <<docs/day02.md#day02::ensure-homogeneity>>[init]
     if len(seq2) != n:
         yield from chain(
             generate_invalid_ids(range(r.start, 10**n), divisors, check_duplicates),
             generate_invalid_ids(range(10**n, r.stop), divisors, check_duplicates))
         return
     # ~/~ end
-    # ~/~ begin <<docs/day02.md#docs/day02.md::loop-over-divisors>>[init]
+    # ~/~ begin <<docs/day02.md#day02::loop-over-divisors>>[init]
     for d in divisors(n):
         x1 = int(seq1[:d])
         x2 = int(seq2[:d])
@@ -72,7 +72,7 @@ def generate_invalid_ids(r: range, divisors=divisors, check_duplicates=True) -> 
                 yield num
     # ~/~ end
 # ~/~ end
-# ~/~ begin <<docs/day02.md#docs/day02.md::generators>>[1]
+# ~/~ begin <<docs/day02.md#day02::generators>>[1]
 
 def limited_divisors(x: int) -> Generator[int]:
     if x % 2 == 0:
@@ -81,5 +81,10 @@ def limited_divisors(x: int) -> Generator[int]:
 # ~/~ end
 
 if __name__ == "__main__":
-    <<docs/day02.md::main>>
+    # ~/~ begin <<docs/day02.md#day02::main>>[init]
+    print("# Day 02")
+    inp = read_input()
+    print("Part 1:", sum(chain(*map(lambda r: generate_invalid_ids(r, limited_divisors, False), inp.ranges))))
+    print("Part 2:", sum(chain(*map(generate_invalid_ids, inp.ranges))))
+    # ~/~ end
 # ~/~ end

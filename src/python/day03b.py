@@ -2,6 +2,7 @@
 from abc import ABCMeta, abstractmethod
 from dataclasses import dataclass
 from collections.abc import Callable, Iterable, Generator
+from typing import Any
 from functools import partial, reduce
 
 # ~/~ begin <<docs/day03.md#day03::read-input>>[init]

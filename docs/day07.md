@@ -10,11 +10,11 @@ from dataclasses import dataclass
 from collections.abc import Generator
 from functools import reduce
 
-<<read-input>>
-<<part-1>>
-<<part-2>>
-<<fold-duct>>
-<<main>>
+<<docs/day07.md::read-input>>
+<<docs/day07.md::part-1>>
+<<docs/day07.md::part-2>>
+<<docs/day07.md::fold-duct>>
+<<docs/day07.md::main>>
 ```
 
 Reading Input
@@ -106,7 +106,7 @@ Main
 if __name__ == "__main__":
     inp = read_input()
     init = next(inp)
-    
+
     state01 = (init.replace('S', '|'), 0)
     state02 = [0 if c == '.' else 1 for c in init]
 

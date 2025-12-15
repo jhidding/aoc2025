@@ -15,7 +15,7 @@ class RangeSet:
     def __post_init__(self):
         sorted_ranges = sorted(self.ranges, key=lambda r: r.start)
         cleaned_ranges = []
-            
+
         for r in sorted_ranges:
             if not cleaned_ranges or r.start not in cleaned_ranges[-1]:
                 cleaned_ranges.append(r)
@@ -25,7 +25,7 @@ class RangeSet:
                 cleaned_ranges[-1] = range(x, max(y, r.stop))
 
         self.ranges = cleaned_ranges
-                
+
     def __contains__(self, i: int) -> bool:
         return bool(binary_search(self.ranges, i))
 ```
@@ -63,7 +63,7 @@ The binary search itself is a bit boring. At all times, we keep a inclusive lowe
 def binary_search(rngs: list[range], i: int) -> Location:
     if not rngs or i < rngs[0].start:
         return Before(0)
-        
+
     a = 0
     b = len(rngs)
 
@@ -124,9 +124,9 @@ Main
 from dataclasses import dataclass
 from collections.abc import Generator
 
-<<range-set>>
-<<binary-search>>
-<<read-input>>
+<<docs/day05.md::range-set>>
+<<docs/day05.md::binary-search>>
+<<docs/day05.md::read-input>>
 
 if __name__ == "__main__":
     print("# Day 05")

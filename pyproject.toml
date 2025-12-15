@@ -14,5 +14,8 @@ entangled-cli = { path = "../../entangled/entangled.py", editable = true }
 
 [dependency-groups]
 dev = [
+    "flameprof>=0.4",
+    "pyright>=1.1.407",
     "pytest>=9.0.1",
+    "python-lsp-server>=1.14.0",
 ]

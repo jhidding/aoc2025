@@ -12,3 +12,9 @@ comment = {"open" = "//"}
 name = "C3"
 identifiers = ["c3"]
 comment = {"open" = "//"}
+
+[hook.repl.Lisp]
+command = "scheme --eedisable"
+first_prompt = "> "
+change_prompt = '(waiter-prompt-string "{key}>")'
+prompt = "{key}> "

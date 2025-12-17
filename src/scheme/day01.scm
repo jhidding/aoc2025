@@ -5,17 +5,6 @@
         (monads monads)
         (parsing parsing))
 
-(define stream-input
-    (case-lambda
-        ((sink) (let loop ((r (sink)))
-            (if (reduced? r)
-                (reduced-value r)
-                (let ((line (get-line (current-input-port))))
-                    (if (eof-object? line)
-                        (sink r)
-                        (loop (sink r line)))))))
-        ((tr sink) (stream-input (tr sink)))))
-
 (define (trace msg value)
     (display msg) (display value) (newline)
     value)

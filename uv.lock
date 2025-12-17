@@ -23,7 +23,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "entangled-cli", editable = "../../entangled/entangled.py" },
+    { name = "entangled-cli", editable = "../../../../../home/johannes/Projects/entangled/entangled.py" },
     { name = "mkdocs-entangled-plugin", specifier = ">=0.5.0" },
     { name = "mkdocs-material", specifier = ">=9.7.0" },
     { name = "pywatchman", specifier = ">=3.0.0" },
@@ -254,7 +254,7 @@ wheels = [
 [[package]]
 name = "entangled-cli"
 version = "2.4.1.dev0"
-source = { editable = "../../entangled/entangled.py" }
+source = { editable = "../../../../../home/johannes/Projects/entangled/entangled.py" }
 dependencies = [
     { name = "brei" },
     { name = "click" },

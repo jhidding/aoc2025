@@ -264,6 +264,7 @@ We make it so that we can add to our combinators library when needed.
 
 ``` {.scheme #combinators-export}
 compose identity iterate parallel parallel-combine vmap const melt curry curry-helper
+swap partial
 ```
 
 ``` {.scheme #combinators-import}

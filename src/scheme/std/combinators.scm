@@ -2,7 +2,8 @@
 (library (std combinators)
   (export
       ; ~/~ begin <<docs/aa-scheme-combinators.md#combinators::combinators-export>>[init]
-      compose identity iterate parallel parallel-combine vmap const melt curry curry-helper swap partial
+      compose identity iterate parallel parallel-combine vmap const melt curry curry-helper
+      swap partial
       ; ~/~ end
   )
   (import (rnrs)
@@ -39,7 +40,7 @@
             f))
         arity-mask
         #f)))
-
+  
   (define (thunk? proc) (= 1 (procedure-arity-mask proc)))
   (define (all pred xs) (not (find (compose not pred) xs)))
   ; ~/~ end
@@ -52,7 +53,7 @@
               (apply values (map (lambda (f) (apply f args)) fs)))
           new-arity-mask
           #f)))
-
+  
   (define (parallel-combine h . fs) (compose h (apply parallel fs)))
   ; ~/~ end
   ; ~/~ begin <<docs/aa-scheme-combinators.md#combinators::combinators>>[6]
@@ -87,7 +88,7 @@
                      <body>))
      ((_ () (<rest> ...) (<cases> ...) <body>)
       (case-lambda <cases> ...))))
-
+  
   (define-syntax curry
     (syntax-rules ()
         ((_ (<xs> ...) <body> ...)

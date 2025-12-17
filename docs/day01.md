@@ -170,7 +170,7 @@ First, I'll define transducers in Scheme.
 ```scheme
 ;| file: src/scheme/std/transducers.scm
 (library (std transducers)
-    (export make-reduced reduced? reduced-value map filter tee)
+    (export make-reduced reduced? reduced-value map filter tee scanl)
     (import (except (rnrs) map filter)
             (prefix (only (rnrs) map filter) internal-))
 
@@ -183,7 +183,7 @@ First, I'll define transducers in Scheme.
                     ; init
                     (() (sink))
                     ; fini
-                    ((r) r)
+                    ((r) (sink r))
                     ; step
                     ((r x) (sink r (f x))))))
             ((f . args) (apply internal-map f args))))
@@ -195,10 +195,20 @@ First, I'll define transducers in Scheme.
                     ; init
                     (() (sink))
                     ; fini
-                    ((r) r)
+                    ((r) (sink r))
                     ; step
-                    ((r x) (when (f x) (sink r x))))))
+                    ((r x) (if (f x) (sink r x) r)))))
             ((f . args) apply internal-filter f args)))
+
+    (define scanl
+        (case-lambda
+            ((f init step) (case-lambda
+                (() (cons init (step)))
+                ((r) (step (step (cdr r) (f (car r)))))
+                ((r x) (let ((r1 (f (car r) x)) (r2 (cdr r)))
+                         (cons r1 (step r2 r1))))))
+            ((f init) (lambda (step) (scanl f init step)))
+            ((f) (lambda (step) (scanl f (f) step)))))
 
     (define (tee . sinks)
         (case-lambda
@@ -223,7 +233,7 @@ First, I'll define transducers in Scheme.
                 (reduced-value r)
                 (let ((line (get-line (current-input-port))))
                     (if (eof-object? line)
-                        r
+                        (sink r)
                         (loop (sink r line)))))))
         ((tr sink) (stream-input (tr sink)))))
 
@@ -239,9 +249,9 @@ First, I'll define transducers in Scheme.
 
 (define print-result
     (case-lambda
-        (() #f)
-        ((r) (display "result: ") (display r) (newline))
-        ((r x) r)))
+        (() '())
+        ((r) (display r) r)
+        ((r x) x)))
 
 (define instruction
   (seq <parsing>
@@ -253,8 +263,12 @@ First, I'll define transducers in Scheme.
 (define (parse-instruction s)
     (parse-string instruction s))
 
-(define (exec state instr)
-    (mod (+ state instr) 100))
+(define count (compose (map (const 1)) (scanl +)))
 
-(stream-input (compose (map parse-instruction) (filter (compose zero? (partial (swap mod) 100))) trace-printer) +)
+(define main (compose (map parse-instruction)
+                      (scanl + 50)
+                      (filter (compose zero? (partial (swap mod) 100)))
+                      count))
+
+(display "Part 1: ") (stream-input main print-result) (newline)
 ```

@@ -18,12 +18,12 @@ from dataclasses import dataclass
 from itertools import chain
 from collections.abc import Generator
 
-<<day02::parsing>>
-<<day02::predicates>>
-<<day02::generators>>
+<<parsing>>
+<<predicates>>
+<<generators>>
 
 if __name__ == "__main__":
-    <<day02::main>>
+    <<main>>
 ```
 
 Parsing
@@ -98,9 +98,9 @@ We can generate all answers directly, without testing intermediate numbers. The 
 ```python
 #| id: generators
 def generate_invalid_ids(r: range, divisors=divisors, check_duplicates=True) -> Generator[int]:
-    <<day02::number-strings>>
-    <<day02::ensure-homogeneity>>
-    <<day02::loop-over-divisors>>
+    <<number-strings>>
+    <<ensure-homogeneity>>
+    <<loop-over-divisors>>
 ```
 
 We start again by converting the start and end of the range into strings.

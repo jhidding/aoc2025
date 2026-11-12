@@ -96,9 +96,9 @@ module day01;
 import std::io;
 import std::math;
 
-<<day01::c3-dial>>
-<<day01::c3-reading>>
-<<day01::c3-main>>
+<<c3-dial>>
+<<c3-reading>>
+<<c3-main>>
 ```
 
 We'll define a struct that keeps all state, and update while reading the input. The logic changes slightly from the Python version, because both division and modulo in C/C3 are different when it comes to negative numbers. Again I spent some time covering all the corner cases.

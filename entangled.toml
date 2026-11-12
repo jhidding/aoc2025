@@ -6,12 +6,17 @@ namespace_default = "private"
 [[languages]]
 name = "Koka"
 identifiers = ["koka"]
-comment = {"open" = "//"}
+comment = {open = "//"}
 
 [[languages]]
 name = "C3"
 identifiers = ["c3"]
-comment = {"open" = "//"}
+comment = {open = "//"}
+
+[[languages]]
+name = "OCaml"
+identifiers = ["ocaml"]
+comment = {open = "(*", close = "*)"}
 
 [hook.repl.Lisp]
 command = "scheme --eedisable"

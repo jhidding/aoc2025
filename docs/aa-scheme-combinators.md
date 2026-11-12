@@ -253,12 +253,12 @@ We make it so that we can add to our combinators library when needed.
 ``` {.scheme file=src/scheme/std/combinators.scm}
 (library (std combinators)
   (export
-      <<combinators::combinators-export>>
+      <<combinators-export>>
   )
   (import (rnrs)
-      <<combinators::combinators-import>>
+      <<combinators-import>>
   )
-  <<combinators::combinators>>
+  <<combinators>>
 )
 ```
 

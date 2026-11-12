@@ -14,9 +14,9 @@ We get a string of digits and need to find the maximum n-digit number that we ca
 from collections.abc import Generator
 from functools import partial
 
-<<day03::read-input>>
-<<day03::joltage>>
-<<day03::main>>
+<<read-input>>
+<<joltage>>
+<<main>>
 ```
 
 Input
@@ -99,14 +99,14 @@ from collections.abc import Callable, Iterable, Generator
 from typing import Any
 from functools import partial, reduce
 
-<<day03::read-input>>
-<<day03::joltage>>
+<<read-input>>
+<<joltage>>
 
-<<day03::duct>>
-<<day03::sum>>
-<<day03::map>>
-<<day03::tee>>
-<<day03::transmain>>
+<<duct>>
+<<sum>>
+<<map>>
+<<tee>>
+<<transmain>>
 ```
 
 First, the `Duct`. This is an object that represents an element in a pipeline. It should have an `init`, `fini` and `step` method. The precise meaning of these methods is given when we implement the `reduce` method.

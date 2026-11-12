@@ -124,9 +124,9 @@ Main
 from dataclasses import dataclass
 from collections.abc import Generator
 
-<<docs/day05.md::range-set>>
-<<docs/day05.md::binary-search>>
-<<docs/day05.md::read-input>>
+<<range-set>>
+<<binary-search>>
+<<read-input>>
 
 if __name__ == "__main__":
     print("# Day 05")

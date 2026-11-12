@@ -10,11 +10,11 @@ from dataclasses import dataclass
 from collections.abc import Generator
 from functools import reduce
 
-<<docs/day07.md::read-input>>
-<<docs/day07.md::part-1>>
-<<docs/day07.md::part-2>>
-<<docs/day07.md::fold-duct>>
-<<docs/day07.md::main>>
+<<read-input>>
+<<part-1>>
+<<part-2>>
+<<fold-duct>>
+<<main>>
 ```
 
 Reading Input
